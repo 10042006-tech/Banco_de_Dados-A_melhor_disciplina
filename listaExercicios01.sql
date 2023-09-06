@@ -76,3 +76,7 @@ SELECT autores.nome, SUM(20) AS receita
 FROM autores 
 LEFT JOIN livros ON autores.id = livros.autor_id 
 GROUP BY autores.id;
+
+SELECT alunos.nome, COUNT(*) AS quantidade_matriculas
+FROM matriculas INNER JOIN alunos ON matriculas.aluno_id = alunos.id 
+GROUP BY nome;
