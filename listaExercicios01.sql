@@ -66,3 +66,8 @@ FROM autores
 INNER JOIN livros ON livros.autor_id = autores.id 
 GROUP BY nome
 ORDER BY COUNT(*) DESC LIMIT 1;
+
+SELECT produto, SUM(receita) AS receitas_totais
+FROM vendas 
+GROUP BY produto
+ORDER BY COUNT(*) ASC LIMIT 1;
