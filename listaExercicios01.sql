@@ -72,11 +72,13 @@ FROM vendas
 GROUP BY produto
 ORDER BY COUNT(*) ASC LIMIT 1;
 
-SELECT autores.nome, SUM(20) AS receita
-FROM autores 
-LEFT JOIN livros ON autores.id = livros.autor_id 
-GROUP BY autores.id;
+/*Exercício 18*/
 
 SELECT alunos.nome, COUNT(*) AS quantidade_matriculas
 FROM matriculas INNER JOIN alunos ON matriculas.aluno_id = alunos.id 
 GROUP BY nome;
+
+SELECT produto, COUNT(*) AS quantidade_receitas
+FROM vendas 
+GROUP BY produto 
+ORDER BY COUNT(*) DESC LIMIT 1;
