@@ -25,3 +25,7 @@ SELECT matriculas.curso, COUNT(alunos.id) AS quantidade_alunos
 FROM matriculas 
 INNER JOIN alunos ON matriculas.aluno_id = alunos.id
 GROUP BY curso;
+
+SELECT produto, AVG(receita) AS media_receitas
+FROM vendas 
+GROUP BY produto;
