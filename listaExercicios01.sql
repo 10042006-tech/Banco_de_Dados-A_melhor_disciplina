@@ -44,3 +44,7 @@ HAVING COUNT(*) = 2;
 SELECT livros.titulo, autores.nome 
 FROM livros 
 LEFT JOIN autores ON livros.autor_id = autores.id;
+
+SELECT alunos.nome, matriculas.curso 
+FROM alunos 
+LEFT JOIN matriculas ON alunos.id = matriculas.aluno_id;
