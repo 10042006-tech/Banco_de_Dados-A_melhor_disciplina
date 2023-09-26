@@ -54,7 +54,7 @@ BEGIN /*marca o início do código da procedure*/
 	WHERE Ano_Publicacao <= publicacao ; /*restringe a consulta apenas para um ano menor ou igual*/
 END; /*marca o final do código da procedure*/
 // DELIMITER ; /*redefine o delimitador*/
-CALL sp_LivrosAteAno('2012'); /*chama a procedure
+CALL sp_LivrosAteAno('2012'); /*chama a procedure*/
 
 DELIMITER // 
 CREATE PROCEDURE sp_TitulosPorCategoria(IN nome VARCHAR(150))
