@@ -46,3 +46,12 @@ END;
 // DELIMITER ;
 CALL sp_VerificarLivrosCategoria('Ficção Científica', @livros);
 SELECT @livros;
+
+DELIMITER // 
+CREATE PROCEDURE sp_LivrosAteAno(publicacao INT)
+BEGIN
+	SELECT Titulo FROM Livro 
+	WHERE Ano_Publicacao <= publicacao ;
+END;
+// DELIMITER ;
+CALL sp_LivrosAteAno('2012');
