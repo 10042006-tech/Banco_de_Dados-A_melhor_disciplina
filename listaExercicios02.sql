@@ -47,14 +47,14 @@ END;
 CALL sp_VerificarLivrosCategoria('Ficção Científica', @livros);
 SELECT @livros;
 
-DELIMITER // 
-CREATE PROCEDURE sp_LivrosAteAno(publicacao INT)
-BEGIN
-	SELECT Titulo FROM Livro 
-	WHERE Ano_Publicacao <= publicacao ;
-END;
-// DELIMITER ;
-CALL sp_LivrosAteAno('2012');
+DELIMITER // /*define um novo delimitador*/
+CREATE PROCEDURE sp_LivrosAteAno(publicacao INT) /*cria a procedure com o parâmetro "publicacao"*/
+BEGIN /*marca o início do código da procedure*/
+	SELECT Titulo FROM Livro /*seleciona os titulos da tabela livro*/
+	WHERE Ano_Publicacao <= publicacao ; /*restringe a consulta apenas para um ano menor ou igual*/
+END; /*marca o final do código da procedure*/
+// DELIMITER ; /*redefine o delimitador*/
+CALL sp_LivrosAteAno('2012'); /*chama a procedure
 
 DELIMITER // 
 CREATE PROCEDURE sp_TitulosPorCategoria(IN nome VARCHAR(150))
@@ -89,3 +89,16 @@ BEGIN
 END; 
 // DELIMITER ; 
 CALL sp_AutorAntigo();
+ 
+/*Expliquei o exercício 5*/
+
+DELIMITER // 
+CREATE PROCEDURE sp_LivrosESeusAutores()
+BEGIN
+	SELECT Livro.Titulo, Autor.Nome, Autor.Sobrenome 
+    	FROM Livro INNER JOIN Autor_Livro 
+    	INNER JOIN Autor ON Autor_Livro.Autor_ID = Autor.Autor_ID 
+    	AND Livro.Livro_ID = Autor_Livro.Livro_ID;
+END;
+// DELIMITER ;
+CALL sp_LivrosESeusAutores();
