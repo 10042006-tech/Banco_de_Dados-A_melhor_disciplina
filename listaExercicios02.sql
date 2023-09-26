@@ -61,8 +61,22 @@ CREATE PROCEDURE sp_TitulosPorCategoria(IN nome VARCHAR(150))
 BEGIN
 	SELECT Livro.Titulo FROM Livro 
     	INNER JOIN Categoria 
-   	WHERE Categoria.Categoria_ID = Livro.Categoria_ID 
-    	AND Categoria.Nome = nome;
+   	WHERE Categoria.Categoria_ID = Livro.Categoria_ID AND Categoria.Nome = nome;
 END;
 // DELIMITER ;
 CALL sp_TitulosPorCategoria('Ciência');
+
+DELIMITER // 
+CREATE PROCEDURE sp_AdicionarLivro(IN Vtitulo VARCHAR(255))
+BEGIN
+	DECLARE quantidade_de_livros INT;
+    	SELECT COUNT(Titulo) INTO quantidade_de_livros 
+	FROM Livro WHERE Vtitulo = Titulo;
+	IF quantidade_de_livros = 0 THEN
+		INSERT INTO Livro (Titulo) VALUES (Vtitulo);
+	ELSE
+		SELECT Titulo FROM Livro WHERE Titulo = Vtitulo;
+	END IF;
+END;
+// DELIMITER ;
+CALL sp_AdicionarLivro('Viczinha');
