@@ -80,3 +80,12 @@ BEGIN
 END;
 // DELIMITER ;
 CALL sp_AdicionarLivro('Viczinha');
+
+DELIMITER // 
+CREATE PROCEDURE sp_AutorAntigo()
+BEGIN 
+	SELECT Nome FROM Autor 
+    	ORDER BY Data_Nascimento LIMIT  1;
+END; 
+// DELIMITER ; 
+CALL sp_AutorAntigo();
