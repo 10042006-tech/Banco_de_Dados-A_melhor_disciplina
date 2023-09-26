@@ -19,7 +19,7 @@ CALL sp_LivrosPorCategoria('Autoajuda');
 DELIMITER //
 CREATE PROCEDURE sp_ContarLivrosPorCategoria(IN nome VARCHAR(150))
 BEGIN
-	SELECT Categoria.Nome, COUNT(*) AS quantidade_livros
+	SELECT Categoria.Nome, COUNT(*) AS quantidade_de_livros
 	FROM Livro 
 	INNER JOIN Categoria ON Categoria.Categoria_ID = Livro.Categoria_ID 
 	WHERE Categoria.Nome = nome
@@ -27,3 +27,22 @@ BEGIN
 END;
 // DELIMITER ;
 CALL sp_ContarLivrosPorCategoria('Romance');
+
+DELIMITER // 
+CREATE PROCEDURE sp_VerificarLivrosCategoria(IN nome VARCHAR(150), OUT livros VARCHAR(50))
+BEGIN
+	DECLARE quantidade_de_livros INT;
+	SELECT COUNT(*) INTO quantidade_de_livros
+	FROM Livro 
+	INNER JOIN Categoria ON Categoria.Categoria_ID = Livro.Categoria_ID 
+	WHERE Categoria.Nome = nome 
+	GROUP BY Nome;
+	IF quantidade_de_livros > 0 THEN
+		SET livros = 'Tem livros';
+	ELSE
+		SET livros = 'Não tem livros';
+	END IF;
+END;
+// DELIMITER ;
+CALL sp_VerificarLivrosCategoria('Ficção Científica', @livros);
+SELECT @livros;
